@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
-builder.Services.AddDbContext<MySQLContext>(options => options.UseSqlServer(connection));
 
+// Change UseSqlServer to UseMySql
+builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
@@ -19,7 +19,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IToDoListRepository, ToDoListRepository>();
 
 builder.Services.AddControllers();
-
 
 builder.Services.AddCors(options =>
 {
@@ -31,11 +30,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
