@@ -15,5 +15,10 @@ namespace ListaAfazeres.Model
         [Column("data")]
         [Required]
         public DateTime Data { get; set; }
+
+        [ForeignKey("pessoa_tarefa")]
+        public string pessoaId { get; set; }
+
+        public Pessoa pessoa { get; set; }
     }
 }

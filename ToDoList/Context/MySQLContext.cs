@@ -8,4 +8,6 @@ public class MySQLContext : DbContext
     public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
 
     public DbSet<Tarefa> Tarefas { get; set; }
+    public DbSet<Pessoa> Pessoas { get; set; }
+
 }

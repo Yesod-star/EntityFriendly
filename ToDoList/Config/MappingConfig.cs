@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ListaAfazeres.Data.ValueObjects;
 using ListaAfazeres.Model;
-using ToDoList.Model;
 
 namespace ListaAfazeres.Config
 {
@@ -11,6 +10,7 @@ namespace ListaAfazeres.Config
         {
             var mappingConfig = new MapperConfiguration(config => {
                 config.CreateMap<Tarefa, TarefaVO>().ReverseMap();
+                config.CreateMap<Pessoa, PessoaVO>().ReverseMap();
             });
             return mappingConfig;
         }

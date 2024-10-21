@@ -4,6 +4,7 @@ using ListaAfazeres.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListaAfazeres.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    partial class MySQLContextModelSnapshot : ModelSnapshot
+    [Migration("20241017173546_pessoa")]
+    partial class pessoa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,29 +64,9 @@ namespace ListaAfazeres.Migrations
                         .HasColumnType("varchar(150)")
                         .HasColumnName("description");
 
-                    b.Property<string>("pessoaId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<long>("pessoaId1")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("pessoaId1");
-
                     b.ToTable("Tarefa");
-                });
-
-            modelBuilder.Entity("ListaAfazeres.Model.Tarefa", b =>
-                {
-                    b.HasOne("ListaAfazeres.Model.Pessoa", "pessoa")
-                        .WithMany()
-                        .HasForeignKey("pessoaId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("pessoa");
                 });
 #pragma warning restore 612, 618
         }
